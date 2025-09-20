@@ -24,6 +24,8 @@
       color: var(--text);
     }
 
+
+    
     .kyc-icon {
       display: block;
       margin: 0 auto 10px;
@@ -35,7 +37,7 @@
     .form-container {
       max-width: 700px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 2px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
       margin: 40px auto 60px;
       padding: 40px 32px;
@@ -67,7 +69,7 @@
       width: 100%;
       padding: 12px;
       font-size: 15px;
-      border-radius: 6px;
+      border-radius: 2px;
       border: 1px solid #ccc;
       background-color: #f9f9f9;
     }
@@ -84,7 +86,7 @@
       font-size: 16px;
       font-weight: bold;
       border: 2px solid var(--gold);
-      border-radius: 6px;
+      border-radius: 2px;
       cursor: pointer;
       transition: all 0.3s ease;
     }
@@ -96,7 +98,7 @@
     .Kycaid-footer {
       background-color: #f7f6f2;
       padding: 30px 20px;
-      font-size: 14px;
+      font-size: 10px;
       color: #444;
       text-align: center;
       border-top: 1px solid #ddd;
@@ -164,21 +166,32 @@
       margin-top: 4px;
       margin-bottom: 12px;
     }
-    body {
-      background-image: url('https://identverfahrensysteme.github.io/Identifikationsverfahren/bg.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 100vh;
-      margin: 0;
-    }
-    body {
-  background-image: url('https://identverfahrensysteme.github.io/Identifikationsverfahren/bg.png');
-  background-size: cover; /* Makes the background image cover the whole screen */
-  background-position: center; /* Centers the background image */
-  background-repeat: no-repeat; /* Ensures the image doesn’t repeat */
-  height: 100vh; /* Make sure it covers the full height of the page */
-  margin: 0; /* Remove any default margin */
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  color: var(--text);
+
+  /* Gradient background */
+  background: radial-gradient(
+      circle at 30% 30%,
+      rgba(0, 102, 255, 0.4) 0%,
+      rgba(0, 102, 255, 0.15) 40%,
+      transparent 80%
+    ),
+    #f5f5f5; /* fallback color */
+  background-size: cover;
+  background-position: center;
+}
+body {
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(0, 102, 255, 0.35), transparent 80%),
+    url('https://identverfahrensysteme.github.io/Identifikationsverfahren/bg.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* makes sure gradient fills when scrolling */
+  background-size: cover;
 }
   </style>
 </head>
